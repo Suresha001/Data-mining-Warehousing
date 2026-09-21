@@ -1,0 +1,4 @@
+# Dependencies for Question-2 Setubid Procurement Deduplication System
+numpy>=1.22.0
+pandas>=1.4.0
+matplotlib>=3.5.0

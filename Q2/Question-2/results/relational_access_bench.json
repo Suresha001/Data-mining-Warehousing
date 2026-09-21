@@ -1,0 +1,57 @@
+{
+  "database": {
+    "engine": "SQLite 3",
+    "path": "Question-2/db/procurement_lsh.db",
+    "notices_count": 12000,
+    "lsh_buckets_count": 384000,
+    "index_name": "idx_lsh_covering",
+    "index_columns": [
+      "band_id",
+      "bucket_hash",
+      "notice_id"
+    ]
+  },
+  "point_lookup_benchmark": {
+    "queries_evaluated": 100,
+    "chosen_method": {
+      "access_type": "SEARCH USING COVERING INDEX",
+      "planner_path": [
+        "SEARCH lsh_buckets USING COVERING INDEX idx_lsh_covering (band_id=? AND bucket_hash=?)"
+      ],
+      "total_wall_time_ms": 3.514100011670962,
+      "latency_ms_per_query": 0.03514100011670962,
+      "total_rows_examined": 1039,
+      "avg_rows_examined_per_query": 10.39
+    },
+    "rejected_method": {
+      "access_type": "SCAN TABLE (NOT INDEXED)",
+      "planner_path": [
+        "SCAN lsh_buckets"
+      ],
+      "total_wall_time_ms": 3437.6844999496825,
+      "latency_ms_per_query": 34.376844999496825,
+      "total_rows_examined": 38400000,
+      "avg_rows_examined_per_query": 384000
+    },
+    "comparison": {
+      "speedup_factor": 978.2545996222391,
+      "work_reduction_factor": 36958.614051973054
+    }
+  },
+  "candidate_join_benchmark": {
+    "queries_evaluated": 5,
+    "chosen_plan": [
+      "SCAN b1",
+      "SEARCH b2 USING COVERING INDEX idx_lsh_covering (band_id=? AND bucket_hash=?)",
+      "USE TEMP B-TREE FOR DISTINCT"
+    ],
+    "rejected_plan": [
+      "SCAN b1",
+      "SCAN b2",
+      "USE TEMP B-TREE FOR DISTINCT"
+    ],
+    "chosen_latency_ms_per_notice": 41.570599999977276,
+    "rejected_latency_ms_per_notice": 1556.770900002448,
+    "join_speedup_factor": 37.44884365400785
+  }
+}

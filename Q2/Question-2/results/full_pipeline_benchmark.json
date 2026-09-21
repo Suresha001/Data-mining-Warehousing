@@ -1,0 +1,68 @@
+{
+  "system_configuration": {
+    "K": 128,
+    "b": 32,
+    "r": 4,
+    "tau_star": 0.6028,
+    "c_max": 150,
+    "tau_screen": 0.45,
+    "nightly_budget_seconds": 1200.0
+  },
+  "run1_execution_metrics": {
+    "stage1_load_data_s": 0.6023731000022963,
+    "stage2_preprocess_s": 35.34186609997414,
+    "stage3_generate_signatures_s": 9.65094170003431,
+    "stage4_build_lsh_index_s": 5.935008300002664,
+    "stage5_persist_sqlite_s": 11.872195100004319,
+    "stage6_retrieve_candidates_s": 1.4716251000063494,
+    "stage7_screen_minhash_s": 2.2789394999854267,
+    "stage8_verify_exact_s": 22.15192680002656,
+    "stage9_generate_cards_s": 4.1798289000289515,
+    "total_e2e_runtime_s": 93.63989270001184,
+    "budget_utilization_pct": 7.803324391667653,
+    "budget_headroom_seconds": 1106.3601072999882,
+    "speedup_vs_budget": 12.815050993750747,
+    "peak_memory_mb": 3194.5678329467773
+  },
+  "workload_and_deduplication_results": {
+    "total_notices_processed": 12000,
+    "total_candidate_pairs": 1032576,
+    "screened_pairs": 231016,
+    "verified_duplicate_pairs": 19961,
+    "total_opportunity_cards": 4189,
+    "multi_notice_cards_count": 1715,
+    "labelled_same_recall_count": 279,
+    "labelled_same_total": 279,
+    "labelled_same_recall_pct": 100.0,
+    "missed_merges_count": 0,
+    "failures_or_errors": []
+  },
+  "determinism_and_rerun_audit": {
+    "clean_rerun_runtime_s": 103.07444400002714,
+    "candidate_pairs_match": true,
+    "screened_pairs_match": true,
+    "verified_duplicates_match": true,
+    "notice_card_ids_mismatches": 0,
+    "rerun_deterministic": true
+  },
+  "stable_card_id_strategy": {
+    "initial_batch_minting_rule": "CARD-<canonical_anchor_nid> using min(cluster_notice_ids)",
+    "limitation_statement": "Dynamic re-evaluation of min(cluster_notice_ids) is NOT universally guaranteed stable on its own for arbitrary future arrivals, because a future notice with a smaller lexicographical ID would shift the minimum if recomputed.",
+    "preservation_mechanism": "Production stability is guaranteed by the persistent notice-to-card mapping table. Incoming duplicates inherit the existing established Card ID without recomputing complete cluster membership.",
+    "membership_hash_avoided": true,
+    "tested_guarantees": {
+      "existing_cards_unchanged_on_rerun": "12,000 / 12,000 notices retain 100% identical card IDs across clean reruns (0 mismatches)",
+      "existing_cards_unchanged_on_incremental_add": "Existing card IDs remain unchanged when a new duplicate is added and assigned to an existing established card",
+      "incremental_arrival_demonstration": {
+        "target_established_card": "CARD-N000009",
+        "existing_notice": "N000010",
+        "card_id_before": "CARD-N000009",
+        "card_id_after": "CARD-N000009",
+        "new_synthetic_notice": "N099999_CORRIGENDUM",
+        "assigned_card_id": "CARD-N000009",
+        "existing_notices_renamed": 0,
+        "bookmark_stability_preserved": true
+      }
+    }
+  }
+}

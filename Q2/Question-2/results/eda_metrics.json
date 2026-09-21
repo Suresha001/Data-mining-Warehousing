@@ -1,0 +1,49 @@
+{
+  "corpus": {
+    "total_notices": 12000,
+    "unique_portals": 260,
+    "partitions_count": 8,
+    "zero_nulls": true,
+    "top_portal": {
+      "portal_id": "P094",
+      "count": 1426,
+      "pct": 11.883333333333333
+    },
+    "nodal_portals_count": 4665,
+    "nodal_portals_pct": 38.875
+  },
+  "text_lengths": {
+    "title_chars": {
+      "min": 40,
+      "median": 80.0,
+      "mean": 80.57475,
+      "max": 131
+    },
+    "body_chars": {
+      "min": 1500,
+      "median": 4482.0,
+      "mean": 4527.3000833333335,
+      "max": 8127
+    }
+  },
+  "labelled_pairs": {
+    "total": 900,
+    "different": 621,
+    "same": 279,
+    "diff_pct": 69.0,
+    "same_pct": 31.0,
+    "imbalance_ratio": 2.225806451612903
+  },
+  "pairwise_agreement": {
+    "same_pairs": {
+      "estimated_value_pct": 100.0,
+      "closing_date_pct": 50.89605734767025,
+      "same_portal_pct": 0.0
+    },
+    "diff_pairs": {
+      "estimated_value_pct": 0.0,
+      "closing_date_pct": 0.1610305958132045,
+      "same_portal_pct": 38.32528180354267
+    }
+  }
+}
